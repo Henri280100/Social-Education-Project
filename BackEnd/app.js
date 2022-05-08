@@ -1,32 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
-const mongoose = require('mongoose');
-const dbConfig = require('./Config/config');
-const routes = require('./Services/index.router');
+const db = require('./config/db');
+const routes = require('./Routers/index.router');
 
 const app = express();
 
+//connect to db 
+db.connect;
+app.use(express.static(path.join(path.join(__dirname, 'public'))));
+//HTTP logger
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 
-mongoose.connect(dbConfig.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log("Yay! You have successfully connected to your DB");
-}).catch(err => {
-    console.log(':( Cannot connect to the database. Exiting now...', err);
-    process.exit();
-});
-
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
-const server = http.createServer(app);
+route(app);
 
-server.listen(port, function() {
-    console.info(`Server is up! and running on port ${port}`);
-})
+app.listen(port, () => {
+    console.log(`listening at http://localhost:${port}`);
+});

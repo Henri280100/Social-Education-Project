@@ -4,16 +4,46 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Henri280100/Social-Education-Project"
+  },
+  "keywords": [
+    "social education",
+    "MEAN",
+    "mean",
+    "first",
+    "project"
+  ],
   "author": "KHL",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "nodemon": "^2.0.16",
+    "argon2": "^0.28.5",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mongoose": "^6.3.0",
-    "nodemon": "^2.0.16"
+    "express-handlebars": "^6.0.2",
+    "jquery": "^3.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.4",
+    "mongoose-slug-generator": "^1.0.4",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^12.3.5",
+    "node-sass": "^7.0.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }
+

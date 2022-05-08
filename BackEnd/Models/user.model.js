@@ -16,8 +16,27 @@ const userSchema = new mongoose.Schema({
     required: "Passwords can't be empty.",
     minLength: [8, "Password must be at least 8 characters long."],
   },
+  repeatPwd:{
+    type: String,
+    required: "Passwords can't be empty.",
+    minLength: [8, "Password must be at least 8 characters long."]
+  },
+  isVerified: { type: Boolean, default: false },
+  age:{
+    type: Number,
+    required: "Age can't be empty.",
+    min: [15, "You must be at least 18 years old."],
+  },
+  gender:{
+    type: String,
+    require: "Gender can't be empty.",
+    kind: [male, female]
+  },
+  
 });
-
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.hash_password);
+};
 userSchema.path("emal").validate((val) => {
   emailRegex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,3 +44,4 @@ userSchema.path("emal").validate((val) => {
 }, "Invalid Email");
 
 module.exports = mongoose.model("User", userSchema);
+
